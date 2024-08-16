@@ -11,6 +11,6 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - name: "Example"
+      - name: "Output API Key"
         run: |
-          echo "Hello World"
+          echo ${{ secrets.EXAMPLE_API_KEY }}
