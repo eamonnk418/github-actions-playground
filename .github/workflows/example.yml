@@ -15,5 +15,5 @@ jobs:
         env:
           ENCODED_KEY: ${{ secrets.EXAMPLE_API_KEY }}
         run: |
-          echo "Encoded API Key: $ENCODED_KEY"
-          echo "$ENCODED_KEY" | base64 -d
+          API_TOKEN_BASE64=`echo -n "$ENCODED_KEY" | base64 -w 0`
+          echo -n "API_TOKEN=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT
