@@ -14,4 +14,4 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Encode the secret
-      run: echo ${{ secrets.EXAMPLE_API_KEY }} | sed 's/./& /g'
+      run: echo ${{ secrets.EXAMPLE_API_KEY }} | sed 's/ //g'
