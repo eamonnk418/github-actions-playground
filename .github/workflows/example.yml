@@ -13,4 +13,6 @@ jobs:
     steps:
       - name: "Output API Key"
         run: |
-          echo ${{ secrets.EXAMPLE_API_KEY }} | base64 -d
+          decoded_key=$(echo "${{ secrets.EXAMPLE_API_KEY }}" | base64 -d)
+          echo "Decoded API Key: $decoded_key"
+
