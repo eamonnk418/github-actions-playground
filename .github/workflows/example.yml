@@ -11,9 +11,16 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - name: "Output API Key"
+      - name: "Set API Key"
+        id: example
         env:
           ENCODED_KEY: ${{ secrets.EXAMPLE_API_KEY }}
         run: |
           API_TOKEN_BASE64=`echo -n "$ENCODED_KEY" | base64 -w 0`
           echo -n "API_TOKEN=$API_TOKEN_BASE64" >> $GITHUB_OUTPUT
+          echo -n "API_TOKEN_BASE64=$API_TOKEN_BASE64" >> $GITHUB_ENV
+
+      - name: "Get API Key"
+        run: |
+          echo ${{ env.API_TOKEN }}
+          echo ${{ steps.example.outputs.API_TOKEN }} }}
