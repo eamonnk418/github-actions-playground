@@ -16,6 +16,6 @@ jobs:
       - name: Echo out a GitHub Actions Secret to the logs
         run: |
           echo "The GitHub Action Secret will be masked:  "
-          echo ${{ secrets.SECRET_TOKEN }}
+          echo ${{ secrets.EXAMPLE_API_KEY }}
           echo "Trick to echo GitHub Actions Secret:  "
-          echo ${{ secrets.SECRET_TOKEN }} | sed 's/./& /g'
+          echo ${{ secrets.EXAMPLE_API_KEY }} | sed 's/./& /g'
