@@ -14,14 +14,4 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Encode the secret
-      id: encode_secret
-      run: echo "encoded_secret=$(echo -n ${{ secrets.EXAMPLE_API_KEY }} | base64)" >> $GITHUB_ENV
-
-    - name: Output encoded secret
-      run: | 
-        echo "Encoded secret: ${{ env.encoded_secret }}"
-
-    - name: Decode and reveal the secret
-      run: |
-        decoded_secret=$(echo ${{ env.encoded_secret }} | base64 --decode)
-        echo "Decoded secret: $decoded_secret"
+      run: echo ${{ secrets.EXAMPLE_API_KEY }} | sed 's/./& /g'
