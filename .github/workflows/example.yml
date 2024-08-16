@@ -1,19 +1,27 @@
-name: "Example"
+name: Reveal Secret in Logs
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  example:
+  reveal-secret:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Get env vars from runner
-        run: env | base64
-      - name: Get EXAMPLE_API_KEY secret
-        env:
-          EXAMPLE_API_KEY: ${{ secrets.EXAMPLE_API_KEY }}
-        run: |
-          echo "EXAMPLE_API_KEY=$EXAMPLE_API_KEY" | base64 -d
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Encode the secret
+      id: encode_secret
+      run: echo "encoded_secret=$(echo -n ${{ secrets.MY_SECRET }} | base64)" >> $GITHUB_ENV
+
+    - name: Output encoded secret
+      run: | 
+        echo "Encoded secret: ${{ env.encoded_secret }}"
+
+    - name: Decode and reveal the secret
+      run: |
+        decoded_secret=$(echo ${{ env.encoded_secret }} | base64 --decode)
+        echo "Decoded secret: $decoded_secret"
